@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import LightModeImage from '../assets/images/mountain-light.jpg'
 import DarkModeImage from '../assets/images/mountain-night2.jpg'
 import LightMode from '../assets/icons/lightmode.svg'
@@ -8,6 +8,35 @@ import TodoList from './todo-list'
 import Footer from './footer'
 
 const Header = ({mode, handleMode}) => {
+  const [newItem, setNewItem] = useState("")
+  const [frmDatas, setFrmDatas] = useState([])
+
+  // const handleChange = () => {
+  //   // if (event.key === 'Enter') {
+  //     console.log(formData)
+  //   // }
+  // }
+
+  const handleEnter = () => {
+    if (event.key === 'Enter') {
+
+      if (!newItem) {
+        alert("please enter details.")
+        return
+      }
+
+      const formData = {
+        id: Math.floor(Math.random() * 1000),
+        value: newItem
+      }
+
+      setFrmDatas(prevFrmDatas => [...prevFrmDatas, formData])
+      setNewItem("")
+
+      // console.log(frmDatas)
+    }
+  }
+
   return (
     <div className='relative '>
         <div className='relative'>
@@ -20,9 +49,9 @@ const Header = ({mode, handleMode}) => {
             <img className='cursor-pointer h-[26px] w-[26px]' src={mode ? LightMode : DarkMode } onClick={handleMode} alt="mode" />
           </div>
 
-          <AddItem mode={mode} />
+          <AddItem mode={mode} newItem={newItem} setNewItem={setNewItem} handleEnter={handleEnter}/>
           
-          <TodoList mode={mode} />
+          <TodoList mode={mode} frmDatas={frmDatas} setFrmDatas={setFrmDatas} />
           <Footer mode={mode} />
         </div>
     </div>
