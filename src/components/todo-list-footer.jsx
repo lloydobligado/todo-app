@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Status from '../utils/todo-status'
 
-  const TodoListFooter = ({mode}) => {
+  const TodoListFooter = ({mode, frmDatas}) => {
   const [status, setStatus] = useState('')
 
   const handleStatus = (statusName) => {
@@ -22,8 +22,8 @@ import Status from '../utils/todo-status'
   
   return (
     <div className={`absolute bottom-0 flex h-[50px] w-full justify-between items-center border-t-[2px] border-solid ${mode ? 'border-[#393A4B]' : 'border-[#E3E4F1]'}`}>
-        <h6 className='text-[14px] leading-[14px] text-[#9495A5] hover:text-[#494C6B] tracking-[-0.194444px] pl-[25px] cursor-pointer'>5 items left</h6>
-        <ul className='flex justify-between items-center w-[166px] h-[18px]'>
+        <h6 className='text-[14px] leading-[14px] text-[#9495A5] hover:text-[#494C6B] tracking-[-0.194444px] pl-[25px] cursor-pointer'>{frmDatas.length} items left</h6>
+        <ul className='md:flex hidden justify-between items-center w-[166px] h-[18px]'>
             { statusMenu }
         </ul>
         <h6 className='text-[14px] leading-[14px] text-[#9495A5] hover:text-[#494C6B] tracking-[-0.194444px] pr-[25px] cursor-pointer'>Clear Completed</h6>
